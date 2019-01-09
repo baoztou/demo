@@ -56,11 +56,10 @@ export default {
       this.axios
         .post("http://hejunke123.gz01.bdysite.com/api/registerSave.php", format)
         .then(res => {
+          alert(res.data.message);
           if (res.data.message == "注册成功") {
-            alert(res.data.message);
             this.$router.push({ path: "/Login" });
           }
-          console.log(res);
         }).catch(err=>console.log(err))
     }
   },
@@ -84,6 +83,11 @@ input {
   text-indent: 20px;
   margin-bottom: 20px;
   font-size: 20px;
+}
+h1{
+    width: 320px;
+    margin: 30px auto;
+    text-align: center
 }
 button {
   width: 60px;

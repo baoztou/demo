@@ -1,4 +1,4 @@
-<template>
+欢<template>
   <div id="app">
     <router-view :system="system"></router-view>
   </div>
@@ -11,10 +11,10 @@ export default {
     return {
       system: {
         logo: require("./assets/logo.png"),
-        title: "欢迎您来到Vue.js的世界",
-        copyright: "版权所有@0918"
+        title: "欢迎来到聊天室",
       }
     };
+        copyright: "版权所有@me"
   },
   components: {}
 };

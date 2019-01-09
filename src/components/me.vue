@@ -22,17 +22,26 @@
       </ul>
       <ul>
         <li>
-          <router-link to>完善信息</router-link>
-          <br>
-          <input type="text" v-model="phoneNumbers" placeholder="请输入手机电话">
-          <button @click="changephone">提交</button>
+          <div @click="hide">
+            <router-link to>完善信息</router-link>
+          </div>
+          <div v-if="!xinhide">
+            <input type="text" v-model="phoneNumbers" placeholder="请输入手机电话">
+            <button @click="changephone">提交</button>
+          </div>
         </li>
         <li>
-          <router-link to>修改密码</router-link><br>
-          <input type="text" v-model="oldPassword" placeholder="请输入老的密码"><br>
-          <input type="text" v-model="newPassword" placeholder="请输入新的密码"><br>
-          <input type="text" v-model="checkPassword" placeholder="再次输入新密码">
-          <button @click="changePassword">提交</button>
+          <div @click="hider">
+            <router-link to>修改密码</router-link>
+          </div>
+          <div v-if="!passwordhide">
+            <input type="text" v-model="oldPassword" placeholder="请输入老的密码">
+            <br>
+            <input type="text" v-model="newPassword" placeholder="请输入新的密码">
+            <br>
+            <input type="text" v-model="checkPassword" placeholder="再次输入新密码">
+            <button @click="changePassword">提交</button>
+          </div>
         </li>
         <li @click="close">
           <router-link to>注销帐户</router-link>
@@ -52,6 +61,8 @@ export default {
   },
   data() {
     return {
+      xinhide: true,
+      passwordhide: true,
       newPassword: "",
       oldPassword: "",
       checkPassword: "",
@@ -70,6 +81,12 @@ export default {
     };
   },
   methods: {
+    hide() {
+      this.xinhide = !this.xinhide;
+    },
+    hider() {
+      this.passwordhide = !this.passwordhide;
+    },
     submitImg() {
       let format = {
         userId: this.id,
@@ -119,6 +136,9 @@ export default {
         .post("http://hejunke123.gz01.bdysite.com/api/editUserSave.php", format)
         .then(res => {
           alert(res.data.message);
+          if (res.data.message == "信息修改成功") {
+            this.xinhide = true;
+          }
         })
         .catch(err => console.log(err));
       this.getImg();
@@ -127,14 +147,17 @@ export default {
       let format = {
         userId: this.id,
         send: 1,
-        newPassword:this.newPassword,
-        oldPassword:this.oldPassword,
-        checkPassword:this.checkPassword
+        newPassword: this.newPassword,
+        oldPassword: this.oldPassword,
+        checkPassword: this.checkPassword
       };
       this.axios
         .post("http://hejunke123.gz01.bdysite.com/api/password.php", format)
         .then(res => {
           alert(res.data.message);
+          if (res.data.message == "用户密码修改成功!") {
+            this.passwordhide = true;
+          }
         })
         .catch(err => console.log(err));
     }

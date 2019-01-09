@@ -36,7 +36,7 @@
                 </div>
                 <h3 class="userName">
                   <em>{{ val.userName==null?"游客":val.userName }}</em>
-                  <em>{{ val.id }} | {{ val.createTime }}</em>
+                  <em> {{ val.createTime }}</em>
                 </h3>
               </h4>
             </div>

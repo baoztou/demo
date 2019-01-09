@@ -1,7 +1,6 @@
 <template>
   <div class="register">
     <top :system="system"></top>
-    <h1>{{ msg }}</h1>
     <form @submit.prevent="newPost">
       <input type="text" placeholder="聊天室名称" v-model="title">
       <quill-editor

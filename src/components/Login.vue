@@ -21,7 +21,7 @@ export default {
   },
   data() {
     return {
-      msg: "欢迎您来到Vue.js的世界",
+      msg: "登录聊天室",
       password: "",
       username: "",
       send: 1
@@ -38,6 +38,7 @@ export default {
         .post("http://hejunke123.gz01.bdysite.com/api/loginSave.php", format)
         .then(res => {
           alert(res.data.message)
+          console.log(res.data)
           if (res.data.message == "登陆成功") {
             this.$cookies.set('username',this.username)
             this.$cookies.set('userId',res.data.userId)
@@ -59,6 +60,11 @@ export default {
 form {
   width: 90%;
   margin: 40px auto 0px;
+}
+h1{
+    width: 300px;
+    margin: 30px auto;
+    text-align: center
 }
 input {
   display: block;
